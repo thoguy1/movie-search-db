@@ -1,0 +1,89 @@
+body {
+  background-color: rgb(47, 47, 134);
+  color: white;
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  font-size: 4vh;
+  text-align: center;
+  color: lightcyan;
+}
+
+button {
+  cursor: pointer;
+}
+
+#searchForm {
+  text-align: center;
+}
+
+#searchForm #movieQuery {
+  width: 30vw;
+  font-size: 1.6vh;
+  margin-bottom: 10px;
+}
+
+#searchButton {
+  font-size: 1.6vh;
+  cursor: pointer;
+}
+
+#favouritesButton {
+  font-size: 1.6vh;
+}
+
+#errorMessage {
+  margin-top: 0.8rem;
+  color: red;
+  font-size: 16pt;
+}
+
+#searchResults {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 220px));
+  grid-gap: 20px;
+  padding: 20px 100px;
+}
+
+#movieDetails,
+#castDetails {
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  max-width: 1200px;
+  padding: 20px;
+  border: 2px solid white;
+  border-radius: 20px;
+  background-color: black;
+  color: white;
+}
+
+#movieDetails p {
+  text-align: left;
+  margin-left: 10px;
+}
+
+.result {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.result img {
+  max-width: 100%;
+  height: auto;
+}
+
+.result:hover {
+  background-color: purple;
+}
+
+.movie-poster {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="shortcut icon" href="#"><!-- no favicon error -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Search</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/axios.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+
+  <h1>Movie Search Database</h1>
+
+  <form id="searchForm">
+    <input type="text" id="movieQuery" placeholder="Enter a movie search">
+    <input type="submit" id="searchButton" value="Search"/>
+    <button id="favouritesButton">Favourites</button>
+  </form>
+  <div id="errorMessage"></div>
+  <div id="searchResults"></div> 
+  <div id="movieDetails"></div>
+  <div id="castDetails"></div>
+</body>
+</html>

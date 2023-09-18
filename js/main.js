@@ -183,11 +183,11 @@ const formatNumber = (number) => {
 // Function to show the movie details
 const generateMovieDetails = (res) => {
   let backdropPicture = res.data.backdrop_path;
-  let width = 500;
+  let width = 400;
   // If there's no backdrop picture, use the poster image instead
   if(backdropPicture === null) {
     backdropPicture = res.data.poster_path;
-    width = 300;
+    width = 200;
   }
   // movieDetails will include Official website if there's any
   const movieDetails = `
@@ -210,19 +210,19 @@ const generateMovieDetails = (res) => {
 // Function to show 'Add to Favourite' and 'Remove from Favourite' buttons
 const generateButtons = (id) => {
   const buttonContainer = document.createElement('div');
-  buttonContainer.style.padding = '20px';
+  buttonContainer.style.paddingBottom = '1.5rem';
 
   // Check if the movie is already in the favorites list
   const isFavourite = favouriteMovieIDs.includes(id);
 
   const favouriteButton = document.createElement('button');
-  favouriteButton.style.fontSize = '20px';
+  favouriteButton.style.fontSize = '1rem';
   favouriteButton.innerHTML = isFavourite ? 'Remove from Favourite' : 'Add to Favourite';
   favouriteButton.style.marginRight = '20px';
   buttonContainer.appendChild(favouriteButton);
 
   const backToSearchResultsButton = document.createElement('button');
-  backToSearchResultsButton.style.fontSize = '20px';
+  backToSearchResultsButton.style.fontSize = '1rem';
   backToSearchResultsButton.innerHTML = 'Back to Search Results';
   buttonContainer.appendChild(backToSearchResultsButton);
 
@@ -273,7 +273,7 @@ const showProductionCompanies = (res) => {
     productionCompaniesList.style.textAlign = 'left';
     movieDetailsContainer.appendChild(productionCompaniesList);
 
-    productionCompanies.forEach(company => {
+    productionCompanies.slice(0, 3).forEach(company => {
       const companyItem = document.createElement('li');
       const companyLink = document.createElement('a');
       companyLink.href = `https://www.themoviedb.org/company/${company.id}`;
@@ -316,7 +316,7 @@ const generateCastandCrew = (res) => {
   const castDiv = document.createElement('div');
   castDiv.style.textAlign = 'center';
   castDiv.innerHTML = "<strong><u>Cast:</u></strong><br>";
-  res.data.cast.slice(0, 5).forEach((cast) => {
+  res.data.cast.slice(0, 4).forEach((cast) => {
     const castItem = document.createElement('div');
     const castLink = document.createElement('a');
     castLink.classList.add('cast-movie-link');
@@ -332,7 +332,7 @@ const generateCastandCrew = (res) => {
   const crewDiv = document.createElement('div');
   crewDiv.style.textAlign = 'center';
   crewDiv.innerHTML = "<strong><u>Crew:<u/></strong><br>";
-  res.data.crew.slice(0, 5).forEach(crew => {
+  res.data.crew.slice(0, 4).forEach(crew => {
     const crewItem = document.createElement('div');
     crewItem.innerHTML = `${crew.job}: ${crew.name}`;
     crewDiv.appendChild(crewItem);
@@ -365,7 +365,7 @@ const showCastDetails = function(castId) {
     const castDetails = `
       <div>
         <h2>${res.data.name}</h2>
-        <img src="https://image.tmdb.org/t/p/w500${res.data.profile_path}" alt="${res.data.name}">
+        <img src="https://image.tmdb.org/t/p/w300${res.data.profile_path}" alt="${res.data.name}">
         <p>Birthday: ${res.data.birthday}</p>
         <p>Place of Birth: ${res.data.place_of_birth}</p>
       </div>
@@ -384,10 +384,10 @@ const showCastDetails = function(castId) {
 const generateBackToMovieButton = () => {
   const buttonContainer = document.createElement('div');
   const backToMovieButton = document.createElement('button');
-  backToMovieButton.style.fontSize = '20px';
+  backToMovieButton.style.fontSize = '1rem';
   buttonContainer.appendChild(backToMovieButton);
   backToMovieButton.innerHTML = 'Back to Movie Details';
-  buttonContainer.style.padding = '20px';
+  buttonContainer.style.paddingBottom = '1.5rem';
   castDetailsContainer.appendChild(buttonContainer);;
 
   backToMovieButton.addEventListener('click', (ev) => {

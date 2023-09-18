@@ -1,65 +1,3 @@
-/* 
-  Week 7 Tuesday homework:
-
-  Replicate the UI of www.themoviedb.org on your own SPA!
-
-  1. When the user types a search and clicks the button,
-     get the text they typed and use it to perform an AJAX
-     request to the TMDB API, replacing the hardcoded `alien` 
-     in `&query=alien` of the URL with the user's search text.
-     
-  2. Loop through the results and show them on the page - at least
-     the movie title, year, and overview text. Try to work out
-     how to show an appropriate small size of movie poster image too!
-     You might have to RTFM or STFW for this one since you don't get 
-     the full poster URL with the results for each movie. Use some
-     CSS to make it look nice - lay them out in a grid, for example,
-     i.e. not just one movie per row, but across the page (this is
-     only a couple of CSS properties).
-     
-  3. Set up a click handler so that when a user clicks on a movie, 
-     they are "taken" to a movie details "page", which for an SPA
-     actually means that you hide the search results <div> (using HTML 
-     classes and CSS), and show a details <div>. To get the more detailed
-     results for a single movie to show on this page, you will have 
-     to know the id of the specific movie that was clicked, (hints in 
-     the .then() handler below ) and plug it into a *different* endpoint URL 
-     (docs here: https://developer.themoviedb.org/reference/movie-details) 
-     to make an AJAX request to. When you get that data back, format 
-     it into HTML tags and add it to the details <div> of your page.
-     Display whatever details sound interesting - budget & revenue, 
-     production company info, languages, votes/ratings, genre tags, etc.
-     What about a larger poster, or using the `backdrop_path` as your
-     background image, or links to the official website, or the IMDB page? 
-
-  4. OPTIONAL/BONUS: 
-      - Make a 'back' link on the movie details page to "take you back"
-        to the previous search results "page" (which will actually just
-        be the reverse of seeing this details "page", i.e. showing and
-        hiding the relevant <div>s.)
-      - Implement pagination: use the `&page=N` querystring parameter to
-        request pages of results beyond the first, and connect these
-        requests to UI elements such as "Previous Page" and "Next Page"
-        links, or even a list of page number links " << 1 2 3 4 >> "
-      - Use the production companies data in the details to link to
-        a production company "page", which might show other movies
-        by the same company. 
-      - Use the Movie Credits endpoint 
-        (docs: https://developer.themoviedb.org/reference/movie-credits) 
-        to add detailed cast & crew information, including headshots, to 
-        the movie details page (by making a second AJAX request). What
-        about a details page for an actor, listing the movies they have
-        featured in, with links to those movies (i.e. your own movie 
-        details page, from the search results)
-      - Play around and experiment! What other data does this huge API
-        offer that you can integrate and cross-reference with? 
-        What about allowing your users to create favourites/bookmarks
-        of the movies they are browsing? You might want to use the 
-        browser's LocalStorage to persist this data across page loads.
-
-
-  RTFM: https://developer.themoviedb.org/reference/intro/getting-started
-*/
 
 const TMDB_MOVIE_SEARCH_URL = 'https://api.themoviedb.org/3/search/movie';
 const TMDB_API_KEY = '24d863d54c86392e6e1df55b9a328755';
@@ -257,11 +195,11 @@ const generateMovieDetails = (res) => {
       <h2>${res.data.title} (${res.data.release_date.substring(0, 4)})</h2>
       <img src="https://image.tmdb.org/t/p/w${width}${backdropPicture}" alt="${res.data.title}">
       <p>${res.data.overview}</p>
-      <p>Budget: $${formatNumber(res.data.budget)}</p>
-      <p>Revenue: $${formatNumber(res.data.revenue)}</p>
-      <p>Vote Average: ${res.data.vote_average}</p>
-      <p>Vote Count: ${res.data.vote_count}</p>
-      ${res.data.homepage !== '' ? `<p><a href="${res.data.homepage}" target="_blank">Official Website</a></p>` : ''}
+      <div class="number-info">Budget: $${formatNumber(res.data.budget)}</div>
+      <div class="number-info">Revenue: $${formatNumber(res.data.revenue)}</div>
+      <div class="number-info">Vote Average: ${res.data.vote_average}</div>
+      <div class="number-info">Vote Count: ${res.data.vote_count}</div>
+      ${res.data.homepage !== '' ? `<div class="number-info"><a href="${res.data.homepage}" target="_blank">Official Website</a></div>` : ''}
     </div>
   `;
   
@@ -331,7 +269,7 @@ const showProductionCompanies = (res) => {
   const productionCompanies = res.data.production_companies;
   if (productionCompanies.length > 0) {
     const productionCompaniesList = document.createElement('ul');
-    productionCompaniesList.innerHTML = "<h3>Production Companies:</h3>";
+    productionCompaniesList.innerHTML = "<strong><u>Production Companies:</u></strong>";
     productionCompaniesList.style.textAlign = 'left';
     movieDetailsContainer.appendChild(productionCompaniesList);
 
